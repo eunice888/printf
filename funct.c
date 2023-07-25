@@ -16,7 +16,7 @@ int print_uns(va_list types, char buffer[],
 	int i = BUFF_SIZE - 2;
 	unsigned long int num = va_arg(types, unsigned long int);
 
-	num = convert_size_unsgnd(num, size);
+	num = size_unsgnd(num, size);
 
 	if (num == 0)
 		buffer[i--] = '0';
@@ -31,7 +31,7 @@ int print_uns(va_list types, char buffer[],
 
 	i++;
 
-	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
+	return (write_uns(0, i, buffer, flags, width, precision, size));
 }
 
 /**
@@ -54,7 +54,7 @@ int print_oct(va_list types, char buffer[],
 
 	UNUSED(width);
 
-	num = convert_size_unsgnd(num, size);
+	num = size_unsgnd(num, size);
 
 	if (num == 0)
 		buffer[i--] = '0';
@@ -72,7 +72,7 @@ int print_oct(va_list types, char buffer[],
 
 	i++;
 
-	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
+	return (write_uns(0, i, buffer, flags, width, precision, size));
 }
 
 /**
@@ -88,7 +88,7 @@ int print_oct(va_list types, char buffer[],
 int print_hex(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	return (print_hexa(types, "0123456789abcdef", buffer,
+	return (print_hexul(types, "0123456789abcdef", buffer,
 		flags, 'x', width, precision, size));
 }
 
@@ -105,7 +105,7 @@ int print_hex(va_list types, char buffer[],
 int print_hexu(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	return (print_hexa(types, "0123456789ABCDEF", buffer,
+	return (print_hexul(types, "0123456789ABCDEF", buffer,
 		flags, 'X', width, precision, size));
 }
 
@@ -131,7 +131,7 @@ int print_hexul(va_list types, char map_to[], char buffer[],
 
 	UNUSED(width);
 
-	num = convert_size_unsgnd(num, size);
+	num = size_unsgnd(num, size);
 
 	if (num == 0)
 		buffer[i--] = '0';
@@ -152,5 +152,5 @@ int print_hexul(va_list types, char map_to[], char buffer[],
 
 	i++;
 
-	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
+	return (write_uns(0, i, buffer, flags, width, precision, size));
 }

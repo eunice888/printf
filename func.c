@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * print_character – print out a character
+ * print_characteracter – print out a character
  * @types: the list of arguments
  * @buffer: the buffer array to handle print
  * @flags:  the active flags
@@ -10,12 +10,12 @@
  * @size: the size specifier
  * Return: the number of characters printed
  */
-int print_character (va_list types, char buffer[],
+int print_characteracter (va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	char c = va_arg(types, int);
 
-	return (handle_write_char(c, buffer, flags, width, precision, size));
+	return (handle_write(c, buffer, flags, width, precision, size));
 }
 
 /**
@@ -109,11 +109,11 @@ int print_integer(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int i = BUFF_SIZE - 2;
-	int is_negative = 0;
+	int is_neg = 0;
 	long int n = va_arg(types, long int);
 	unsigned long int num;
 
-	n = convert_size_number(n, size);
+	n = size_number(n, size);
 
 	if (n == 0)
 		buffer[i--] = '0';
@@ -124,7 +124,7 @@ int print_integer(va_list types, char buffer[],
 	if (n < 0)
 	{
 		num = (unsigned long int)((-1) * n);
-		is_negative = 1;
+		is_neg = 1;
 	}
 
 	while (num > 0)
@@ -135,7 +135,7 @@ int print_integer(va_list types, char buffer[],
 
 	i++;
 
-	return (write_number(is_negative, i, buffer, flags, width, precision, size));
+	return (write_numb(is_neg, i, buffer, flags, width, precision, size));
 }
 
 /**
@@ -182,4 +182,3 @@ int print_bin(va_list types, char buffer[],
 	}
 	return (count);
 }
-
